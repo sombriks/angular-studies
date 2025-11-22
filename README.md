@@ -16,7 +16,7 @@ explored.
 
 - [Hello World](https://github.com/sombriks/angular-studies/tree/01-hello-world)
 - [Basic Interactivity](https://github.com/sombriks/angular-studies/tree/02-click-counter)
-- [Basic Components]
+- [Basic Components](https://github.com/sombriks/angular-studies/tree/03-components)
 - [Navigation]
 - [The Angular CLI]
 - [Directives]
