@@ -23,10 +23,11 @@ Back to [main](https://github.com/sombriks/angular-studies)
 
 ## The click counter
 
-To make a counter all you need is a [signal](https://angular.dev/guide/signals)
-and an event to update it:
+To make a counter, all you need is a [signal](https://angular.dev/guide/signals)
+and fire a simple event to update it:
 
 ```typescript
+// src/app/app.ts
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
@@ -40,13 +41,42 @@ import { RouterOutlet } from '@angular/router';
     
     <router-outlet />
   `,
-  styles: [],
+  styles: [`button { margin: 1rem; }`],
 })
 export class App {
   protected readonly title = signal('hello-world');
   protected readonly counter = signal(0);
 }
 ```
+
+Older angular versions simply relied on direct use of class properties:
+
+```typescript
+import { Component, signal } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+
+@Component({
+  selector: 'app-root',
+  imports: [RouterOutlet],
+  template: `
+    <h1>Welcome to {{ title() }}!</h1>
+
+    <button (click)="counter.set(counter() + 1)">Count is {{counter()}}</button>
+    <button (click)="doubler = doubler * 2">Double is {{doubler}}</button>
+    
+    <router-outlet />
+  `,
+  styles: [`button { margin: 1rem; }`],
+})
+export class App {
+  protected readonly title = signal('hello-world');
+  protected readonly counter = signal(0);
+  protected doubler = 2;
+}
+```
+
+On such simple example there is no real difference between using a signal or a
+property directly. But the differences will appear on next examples.
 
 ## How to build
 
@@ -59,14 +89,9 @@ npm start
 
 ## Noteworthy
 
-- Ideally provide an empty directory for new angular projects.
-- The command used to create the project was intended to avoid all interactive
-  prompts, bu you still might get one from angular cli itself.
-- Even being a minimal project, this is actually an
-  [angular workspace](https://angular.dev/reference/configs/workspace-config).
-- Project also comes prepared to use
-  [routes](https://angular.dev/api/router/Route#simple-configuration) for
-  navigation.
+- Any sort of attribute and method can be used in template, as long as it gets
+  properly declared and minimally accessible (i.e. you can't use private props
+  or methods on the template).
 
 ## Further reading
 
