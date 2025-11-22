@@ -6,7 +6,7 @@ projects
 ## Table of contents
 
 - Hello World
-- [Basic Interactivity]
+- [Basic Interactivity](https://github.com/sombriks/angular-studies/tree/02-click-counter)
 - [Basic Components]
 - [Navigation]
 - [The Angular CLI]
