@@ -1,16 +1,15 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Counter } from './counter/counter';
+import { Doubler } from "./components/doubler/doubler";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Counter],
+  imports: [RouterOutlet, Counter, Doubler],
   template: `
     <h1>Welcome to {{ title() }}!</h1>
-
-    <app-counter/>
-    <button (click)="doubler = doubler * 2">Double is {{doubler}}</button>
-    
+    <app-counter [counter]="counter()" (onCount)="counter.set($event)"></app-counter>
+    <app-doubler></app-doubler>
     <router-outlet />
   `,
   styles: [`button { margin: 1rem; }`],
@@ -18,7 +17,7 @@ import { Counter } from './counter/counter';
 export class App {
 
   protected readonly title = signal('hello-world')
-  protected doubler = 2
+  protected readonly counter = signal(7)
 
   constructor() {
       console.log('init')

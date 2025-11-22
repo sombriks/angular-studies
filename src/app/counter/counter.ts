@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 
 @Component({
   selector: 'app-counter',
@@ -7,10 +7,11 @@ import { Component, signal } from '@angular/core';
     <p>
       counter works!
     </p>
-    <button (click)="counter.set(counter() + 1)">Count is {{counter()}}</button>
+    <button (click)="onCount.emit(counter() + 1)">Count is {{counter()}}</button>
   `,
   styles: ``,
 })
 export class Counter {
-  protected readonly counter = signal(0)
+  readonly counter = input(0)
+  readonly onCount = output<number>();
 }
