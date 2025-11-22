@@ -21,28 +21,31 @@ Back to [main](https://github.com/sombriks/angular-studies)
 
 - node 22
 
-## Initial setup
+## The click counter
 
-You must use [angular cli](https://angular.dev/tools/cli) to generate a
-new project:
+To make a counter all you need is a [signal](https://angular.dev/guide/signals)
+and an event to update it:
 
-```bash
-rm .gitignore
-mv README.md _README.md
-sudo npm i -g @angular/cli
-ng new hello-world \
-    --directory . \
-    --style=scss \
-    --ssr=false \
-    --ai-config=none \
-    --minimal \
-    --skip-tests \
-    --skip-git \
-    --inline-style \
-    --inline-template \
-    --zoneless
-mv README.md HELP.md
-mv _README.md README.md
+```typescript
+import { Component, signal } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+
+@Component({
+  selector: 'app-root',
+  imports: [RouterOutlet],
+  template: `
+    <h1>Welcome to {{ title() }}!</h1>
+
+    <button (click)="counter.set(counter() + 1)">Count is {{counter()}}</button>
+    
+    <router-outlet />
+  `,
+  styles: [],
+})
+export class App {
+  protected readonly title = signal('hello-world');
+  protected readonly counter = signal(0);
+}
 ```
 
 ## How to build
