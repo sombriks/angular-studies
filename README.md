@@ -123,7 +123,7 @@ to a local one, but no changing.
 In order to propagate any desired modification, it needs to go as an event, as
 seen in the click event firing an `emit` from an `output`.
 
-The parent can then handle this way to interact with the child component:
+The parent can then handle with the child component this way:
 
 ```typescript
 import { Component, signal } from '@angular/core';
@@ -155,14 +155,80 @@ export class App {
 }
 ```
 
-Similar goal used to be achieved using special annotated fields before signals:
+Before signals, message passing used to be done by special annotated fields.
+
+Let's create the doubler:
 
 ```bash
-npx ng generate component components/doubler --inline-template=false --inline-style=false
+npx ng generate component components/doubler \
+  --inline-template=false \
+  --inline-style=false
 ```
 
+You can override the project defaults for template and style.
+
+Instead of signals, You can use `Input`, `Output` and `EventEmitter`:
+
 ```typescript
+// src/app/components/double/doubler.ts
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+
+@Component({
+  selector: 'app-doubler',
+  imports: [],
+  templateUrl: './doubler.html',
+  styleUrl: './doubler.scss',
+})
+export class Doubler {
+  @Input() doubler = 2
+  @Output() onDouble = new EventEmitter<number>();
+}
 ```
+
+The template is also straightforward:
+
+```html
+<p>doubler works!</p>
+<button (click)="onDouble.emit(doubler = doubler * 2)">Double is {{doubler}}</button>
+```
+
+For the parent, there is no difference on how to interact with children with
+this style of property/event idiom:
+
+```typescript
+import { Component, signal } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+import { Counter } from './counter/counter';
+import { Doubler } from "./components/doubler/doubler";
+
+@Component({
+  selector: 'app-root',
+  imports: [RouterOutlet, Counter, Doubler],
+  template: `
+    <h1>Welcome to {{ title() }}!</h1>
+    <app-counter [counter]="counter()" (onCount)="counter.set($event)"></app-counter>
+    <app-doubler [doubler]="counter()" (onDouble)="counter.set($event)"></app-doubler>
+    <router-outlet />
+  `,
+  styles: [`button { margin: 1rem; }`],
+})
+export class App {
+
+  protected readonly title = signal('hello-world')
+  protected readonly counter = signal(7)
+
+  constructor() {
+      console.log('init')
+  }
+}
+```
+
+### Which one is better, signals or annotated properties?
+
+Annotated properties are the classic way to do these things in angular. Signals
+are the new, reactive api.
+
+Go with signals  whenever possible.
 
 ## How to build
 
