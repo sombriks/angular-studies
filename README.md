@@ -14,7 +14,7 @@ explored.
 
 ## Table of contents
 
-- [Hello World]
+- [Hello World](https://github.com/sombriks/angular-studies/tree/01-hello-world)
 - [Basic Interactivity]
 - [Basic Components]
 - [Navigation]
