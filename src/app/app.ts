@@ -1,13 +1,14 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { Counter } from './counter/counter';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, Counter],
   template: `
     <h1>Welcome to {{ title() }}!</h1>
 
-    <button (click)="increment()">Count is {{counter()}}</button>
+    <app-counter/>
     <button (click)="doubler = doubler * 2">Double is {{doubler}}</button>
     
     <router-outlet />
@@ -16,14 +17,10 @@ import { RouterOutlet } from '@angular/router';
 })
 export class App {
 
-  constructor(
-    protected readonly title = signal('hello-world'),
-    protected readonly counter = signal(0),
-    protected doubler = 2,) {
-      console.log('init');
-  }
-  
-  protected increment() {
-    this.counter.update(value => value + 1);
+  protected readonly title = signal('hello-world')
+  protected doubler = 2
+
+  constructor() {
+      console.log('init')
   }
 }
