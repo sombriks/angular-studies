@@ -59,6 +59,11 @@ npm start
 - Ideally provide an empty directory for new angular projects.
 - The command used to create the project was intended to avoid all interactive
   prompts, bu you still might get one from angular cli itself.
+- Even being a minimal project, this is actually an
+  [angular workspace](https://angular.dev/reference/configs/workspace-config).
+- Project also comes prepared to use
+  [routes](https://angular.dev/api/router/Route#simple-configuration) for
+  navigation.
 
 ## Further reading
 
