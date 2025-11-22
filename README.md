@@ -7,6 +7,8 @@ projects
 
 - node 22
 
+## Initial setup
+
 ## How to build
 
 Check each project branch, they have specific instructions about what is being
@@ -14,7 +16,7 @@ explored.
 
 ## Table of contents
 
-- [Hello World]
+- Hello World
 - [Basic Interactivity]
 - [Basic Components]
 - [Navigation]
@@ -23,6 +25,8 @@ explored.
 - [Services]
 - [RxJS]
 - _TBD_
+
+Back to [main](https://github.com/sombriks/angular-studies)
 
 ## Further reading
 
