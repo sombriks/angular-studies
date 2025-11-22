@@ -7,7 +7,7 @@ projects
 
 - [Hello World](https://github.com/sombriks/angular-studies/tree/01-hello-world)
 - Basic Interactivity
-- [Basic Components]
+- [Basic Components](https://github.com/sombriks/angular-studies/tree/03-components)
 - [Navigation]
 - [The Angular CLI]
 - [Directives]
