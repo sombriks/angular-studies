@@ -8,7 +8,7 @@ projects
 - [Hello World](https://github.com/sombriks/angular-studies/tree/01-hello-world)
 - [Basic Interactivity](https://github.com/sombriks/angular-studies/tree/02-click-counter)
 - Basic Components
-- [Navigation]
+- [Navigation](https://github.com/sombriks/angular-studies/tree/04-router)
 - [The Angular CLI]
 - [Directives]
 - [Services]
