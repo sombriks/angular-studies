@@ -18,9 +18,8 @@ explored.
 - [Basic Interactivity](https://github.com/sombriks/angular-studies/tree/02-click-counter)
 - [Basic Components](https://github.com/sombriks/angular-studies/tree/03-components)
 - [Navigation](https://github.com/sombriks/angular-studies/tree/04-router)
-- [The Angular CLI]
+- [Services](https://github.com/sombriks/angular-studies/tree/05-services)
 - [Directives]
-- [Services]
 - [RxJS]
 - _TBD_
 
