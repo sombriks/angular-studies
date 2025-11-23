@@ -22,6 +22,50 @@ Back to [main](https://github.com/sombriks/angular-studies)
 
 ## Services
 
+You need services whenever the data being processed and presented is needed on
+other context. You create a service when the
+[Locality of Behavior](https://htmx.org/essays/locality-of-behaviour/) no longer
+applies.
+
+A service is another layer in your application architecture.
+
+For example, let's change the following component to get the data from a service
+instead of local state:
+
+```typescript
+import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-tasks',
+  imports: [CommonModule],
+  templateUrl: './tasks.html',
+  styleUrl: './tasks.scss',
+})
+export class Tasks {
+
+  readonly tasks : Task[] = [
+    { id: 1, title: 'Task One', completed: false },
+    { id: 2, title: 'Task Two', completed: true },
+    { id: 3, title: 'Task Three', completed: false },
+  ];
+
+  selected : Task = {};
+
+  selectTask(task: any) {
+    this.selected = task;
+  }
+}
+
+export type Task = { 
+  id?: number;
+  title?: string;
+  completed?: boolean;
+ };
+```
+
+First create a service to manage the tasks:
+
 ## Shared state
 
 ## External sources
