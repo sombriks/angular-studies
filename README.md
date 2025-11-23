@@ -167,7 +167,8 @@ export class App {
 }
 ```
 
-Ando now, if you change the task list, it will reflect not only locally, but also in any other context using the same shared service:
+Ando now, if you change the task list, it will reflect not only locally, but
+also in any other context using the same shared service:
 
 ```typescript
 import { CommonModule } from '@angular/common';
@@ -211,6 +212,12 @@ export class Tasks {
 ```
 
 ## External state sources
+
+Things get more interesting when you start to consume remote services.
+Besides handle central state, you also need to handle the async nature of remote
+data.
+
+Take this simple node service as example:
 
 ## How to build
 
