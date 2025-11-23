@@ -23,6 +23,10 @@ Back to [main](https://github.com/sombriks/angular-studies)
 
 ## Application routes
 
+Routers are a core part of any
+[SPA](https://developer.mozilla.org/en-US/docs/Glossary/SPA) and angular
+supports it since the old [angularjs](https://angularjs.org/) days.
+
 ## How to build
 
 Uou can start the [development server](http://localhost:4200) with this
@@ -34,8 +38,8 @@ npm start
 
 ## Noteworthy
 
-- Prefer use `npx ng` instead of global `ng` command. Once created the project,
-  use the one already present in the project helps to avoid versions mismatches.
+- The angular cli does not offer any special generator for router, it'd up to
+  you to properly import and use components in your router configuration.
 
 ## Further reading
 

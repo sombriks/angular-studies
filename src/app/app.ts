@@ -1,27 +1,17 @@
-import { Component, model, signal } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { FormsModule } from '@angular/forms';
-import { Counter } from './counter/counter';
-import { Doubler } from "./components/doubler/doubler";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, FormsModule, Counter, Doubler],
+  imports: [RouterOutlet],
   template: `
-    <h1>Welcome to {{ title() }}!</h1>
-    <p> Numbre is  <input type="number" [(ngModel)]="counter" /> </p>
-    <app-counter [counter]="counter()" (onCount)="counter.set($event)"></app-counter>
-    <app-doubler [doubler]="counter()" (onDouble)="counter.set($event)"></app-doubler>
+    <h1>Welcome to {{ title }}!</h1>
     <router-outlet />
   `,
-  styles: [`button { margin: 1rem; }`],
+  styles: [],
 })
 export class App {
 
-  protected readonly title = signal('hello-world')
-  protected readonly counter = model(7)
+  protected title = 'hello-world'
 
-  constructor() {
-      console.log('init')
-  }
 }
