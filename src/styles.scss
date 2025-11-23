@@ -1,4 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
-button { 
-  margin: 1rem; 
+button {
+  margin: 1rem;
+}
+
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    background-color: black;
+    color: whitesmoke;
+  }
 }
