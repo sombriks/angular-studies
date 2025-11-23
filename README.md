@@ -9,9 +9,8 @@ projects
 - [Basic Interactivity](https://github.com/sombriks/angular-studies/tree/02-click-counter)
 - [Basic Components](https://github.com/sombriks/angular-studies/tree/03-components)
 - Navigation
-- [The Angular CLI]
+- [Services](https://github.com/sombriks/angular-studies/tree/05-services)
 - [Directives]
-- [Services]
 - [RxJS]
 - _TBD_
 
@@ -80,7 +79,7 @@ export class App {
 
 ## How to build
 
-Uou can start the [development server](http://localhost:4200) with this
+You can start the [development server](http://localhost:4200) with this
 npm script:
 
 ```bash
