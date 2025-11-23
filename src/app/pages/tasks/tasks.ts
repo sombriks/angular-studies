@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { TaskSvc, Task } from '../../services/task-svc';
 
 @Component({
   selector: 'app-tasks',
@@ -9,21 +10,19 @@ import { Component } from '@angular/core';
 })
 export class Tasks {
 
-  readonly tasks : Task[] = [
-    { id: 1, title: 'Task One', completed: false },
-    { id: 2, title: 'Task Two', completed: true },
-    { id: 3, title: 'Task Three', completed: false },
-  ];
+  constructor(
+    private taskSvc: TaskSvc
+  ) {}  
 
-  selected : Task = {};
+  ngOnInit() {
+    this.tasks = this.taskSvc.getTasks();
+  }
+
+  protected tasks : Task[] = [];
+
+  protected selected : Task = {};
 
   selectTask(task: any) {
     this.selected = task;
   }
 }
-
-export type Task = { 
-  id?: number;
-  title?: string;
-  completed?: boolean;
- };

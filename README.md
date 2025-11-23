@@ -66,6 +66,70 @@ export type Task = {
 
 First create a service to manage the tasks:
 
+```bash
+npx ng g s services/task-svc
+```
+
+The resulting service then can be modified like this:
+
+```typescript
+// src/app/services/task-svc.ts
+import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root', // means this is a singleton
+})
+export class TaskSvc {
+  
+  getTasks() {
+    return [
+      { id: 1, title: 'Task One', completed: false },
+      { id: 2, title: 'Task Two', completed: true },
+      { id: 3, title: 'Task Three', completed: false },
+    ];
+  }
+}
+
+export type Task = { 
+  id?: number;
+  title?: string;
+  completed?: boolean;
+ };
+```
+
+Then modify te component to rely on the service:
+
+```typescript
+import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
+import { TaskSvc, Task } from '../../services/task-svc';
+
+@Component({
+  selector: 'app-tasks',
+  imports: [CommonModule],
+  templateUrl: './tasks.html',
+  styleUrl: './tasks.scss',
+})
+export class Tasks {
+
+  constructor(
+    private taskSvc: TaskSvc
+  ) {}  
+
+  ngOnInit() {
+    this.tasks = this.taskSvc.getTasks();
+  }
+
+  protected tasks : Task[] = [];
+
+  protected selected : Task = {};
+
+  selectTask(task: any) {
+    this.selected = task;
+  }
+}
+```
+
 ## Shared state
 
 ## External sources
