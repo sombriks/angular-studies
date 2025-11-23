@@ -132,11 +132,89 @@ export class Tasks {
 
 ## Shared state
 
-## External sources
+Now that the state is centralized, non-related components can present the same
+data in distinct ways. For example, we can show the task count on main app page,
+outside the `router-outlet`:
+
+```typescript
+import { Component } from '@angular/core';
+import { RouterOutlet, RouterLink } from '@angular/router';
+import { TaskSvc } from './services/task-svc';
+
+@Component({
+  selector: 'app-root',
+  imports: [RouterOutlet, RouterLink],
+  template: `
+    <h1>Welcome to {{ title }}!</h1>
+    <button routerLink="/people">People</button>
+    <button routerLink="/tasks">Tasks</button>
+    <p>There are {{ taskCount }} tasks.</p>
+    <router-outlet />
+  `,
+  styles: [],
+})
+export class App {
+
+  protected title = 'hello-world'
+
+  constructor(
+    private taskSvc: TaskSvc
+  ) {}  
+
+  get taskCount() : number {
+    return this.taskSvc.tasks.length;
+  }
+}
+```
+
+Ando now, if you change the task list, it will reflect not only locally, but also in any other context using the same shared service:
+
+```typescript
+import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';    
+import { FormsModule } from '@angular/forms';
+import { TaskSvc, Task } from '../../services/task-svc';
+
+@Component({
+  selector: 'app-tasks',
+  imports: [CommonModule, FormsModule],
+  templateUrl: './tasks.html',
+  styleUrl: './tasks.scss',
+})
+export class Tasks {
+
+  protected newTaskTitle: string = '';
+
+  constructor(
+    private taskSvc: TaskSvc
+  ) {}  
+
+  protected get tasks() : Task[] {
+    return this.taskSvc.tasks;
+  }
+
+  protected get selected() : Task | undefined {
+    return this.taskSvc.selected;
+  }
+
+  protected set selected(task: Task | undefined) {
+    this.taskSvc.selected = task;
+  }
+
+  protected createTask() {
+    const newTask: Task = {  id: new Date().getTime(), title: this.newTaskTitle, completed: false };
+    this.taskSvc.tasks.push(newTask);
+    this.selected = newTask;
+    this.newTaskTitle = '';
+  }
+}
+```
+
+## External state sources
 
 ## How to build
 
-Uou can start the [development server](http://localhost:4200) with this
+You can start the [development server](http://localhost:4200) with this
 npm script:
 
 ```bash
@@ -145,7 +223,8 @@ npm start
 
 ## Noteworthy
 
--
+- Before signals, services depended on rxjs to keep state properly updated
+  across all application.
 
 ## Further reading
 

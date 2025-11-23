@@ -5,12 +5,24 @@ import { Injectable } from '@angular/core';
 })
 export class TaskSvc {
   
-  getTasks() {
-    return [
-      { id: 1, title: 'Task One', completed: false },
-      { id: 2, title: 'Task Two', completed: true },
-      { id: 3, title: 'Task Three', completed: false },
-    ];
+  private _tasks: Task[] = [
+    { id: 1, title: 'Task One', completed: false },
+    { id: 2, title: 'Task Two', completed: true },
+    { id: 3, title: 'Task Three', completed: false },
+  ];
+
+  private _selected?: Task;
+
+  get tasks(): Task[] {
+    return this._tasks;
+  }
+
+  get selected(): Task | undefined {
+    return this._selected;
+  }
+
+  set selected(task: Task | undefined) {
+    this._selected = task;
   }
 }
 
