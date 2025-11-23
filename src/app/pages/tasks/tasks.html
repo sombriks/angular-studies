@@ -1,6 +1,8 @@
-<div *ngIf="selected?.id">
+
+@if(selected?.id) {
   <h1>{{ selected?.title }}</h1>
-</div>
+}
+
 @if(!selected?.id) {
   <h1>Please select a task</h1>
 }
