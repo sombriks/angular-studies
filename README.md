@@ -217,8 +217,6 @@ Things get more interesting when you start to consume remote services.
 Besides handle central state, you also need to handle the async nature of remote
 data.
 
-Take this simple node service as example:
-
 ## How to build
 
 You can start the [development server](http://localhost:4200) with this
