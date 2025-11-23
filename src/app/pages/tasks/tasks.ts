@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';    
 import { FormsModule } from '@angular/forms';
+import { Observable } from 'rxjs';
+
 import { TaskSvc, Task } from '../../services/task-svc';
 
 @Component({
@@ -17,7 +19,7 @@ export class Tasks {
     private taskSvc: TaskSvc
   ) {}  
 
-  protected get tasks() : Task[] {
+  protected get tasks() : Observable<Task[]> {
     return this.taskSvc.tasks;
   }
 
@@ -30,8 +32,7 @@ export class Tasks {
   }
 
   protected createTask() {
-    const newTask: Task = {  id: new Date().getTime(), title: this.newTaskTitle, completed: false };
-    this.taskSvc.tasks.push(newTask);
+    const newTask = this.taskSvc.createTask(this.newTaskTitle);
     this.selected = newTask;
     this.newTaskTitle = '';
   }

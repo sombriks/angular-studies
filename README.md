@@ -9,9 +9,8 @@ projects
 - [Basic Interactivity](https://github.com/sombriks/angular-studies/tree/02-click-counter)
 - [Basic Components](https://github.com/sombriks/angular-studies/tree/03-components)
 - [Navigation](https://github.com/sombriks/angular-studies/tree/04-router)
-- Services
+- Services and RxJS
 - [Directives]
-- [RxJS]
 - _TBD_
 
 Back to [main](https://github.com/sombriks/angular-studies)
@@ -216,6 +215,66 @@ export class Tasks {
 Things get more interesting when you start to consume remote services.
 Besides handle central state, you also need to handle the async nature of remote
 data.
+
+This is where [rxjs](https://rxjs.dev/) comes to help.
+
+Change the service to perform http requests and expose the results as
+`Observable`:
+
+```typescript
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
+
+@Injectable({
+  providedIn: 'root', // means this s a singleton
+})
+export class TaskSvc {
+  
+  private readonly API_URL = 'http://localhost:3000/api/';
+  
+  private _selected?: Task; 
+  private _tasks$ = new BehaviorSubject<Task[]>([]);
+  private tasks$ = this._tasks$.asObservable();
+
+  constructor(private http: HttpClient) {
+    this.refresh();
+  }  
+  
+  private refresh() {
+    this.http.get<Task[]>(`${this.API_URL}tasks`)
+      .subscribe(tasks => this._tasks$.next(tasks));
+  }
+
+  get tasks(): Observable<Task[]> {
+    return this.tasks$;
+  }
+
+  get selected(): Task | undefined {
+    return this._selected;
+  }
+
+  set selected(task: Task | undefined) {
+    this._selected = task;
+  }
+
+  createTask(title: string): Task {
+    const newTask: Task = { title,  id: new Date().getTime(), completed: false };
+    this.http
+      .post<Task>(`${this.API_URL}tasks`, newTask)
+      .pipe(tap(() => this.refresh()))
+      .subscribe();
+    return newTask;
+  }
+}
+
+export type Task = { 
+  id?: number;
+  title?: string;
+  completed?: boolean;
+ };
+```
 
 ## How to build
 
